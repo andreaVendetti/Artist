@@ -12,8 +12,8 @@ public class UtenteService {
 	@Autowired
 	UtenteRepository repo;
 	
-	public void save(Utente u) {
-		repo.save(u);
+	public Utente save(Utente u) {
+		return repo.save(u);
 	}
 	
 	public Iterable<Utente> getAll(){
