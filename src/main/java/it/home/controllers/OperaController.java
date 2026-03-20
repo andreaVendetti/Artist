@@ -17,11 +17,14 @@ public class OperaController {
 
 	@Autowired
 	OperaService serviceO;
-	
+
 	@GetMapping
 	public Iterable<Opera> getAll(){
 		return serviceO.getAll();
 	}
-	
-	
+
+	@GetMapping("/{id}")
+	public Opera getOpera(int id) {
+		return serviceO.getOpera(id);
+	}
 }

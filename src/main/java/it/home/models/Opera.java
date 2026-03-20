@@ -27,6 +27,18 @@ public class Opera {
 	@Column
 	private int anno;
 
+	// variabile che serve per definire quali sono le opere
+	@Column(name = "is_works")
+	private boolean work;
+	
+	public boolean isWork() {
+		return work;
+	}
+
+	public void setWork(boolean work) {
+		this.work = work;
+	}
+
 	public int getId() {
 		return id;
 	}

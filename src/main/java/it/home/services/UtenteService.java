@@ -11,19 +11,19 @@ public class UtenteService {
 
 	@Autowired
 	UtenteRepository repo;
-	
+
 	public Utente save(Utente u) {
 		return repo.save(u);
 	}
-	
+
 	public Iterable<Utente> getAll(){
 		return repo.findAll();
 	}
-	
+
 	public Utente getOne(int id){
 		return repo.findById(id).get();
 	}
-	
+
 	public void delete(int id){
 		repo.deleteById(id);
 	}

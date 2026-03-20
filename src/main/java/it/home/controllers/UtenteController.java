@@ -17,17 +17,17 @@ public class UtenteController {
 
 	@Autowired
 	UtenteService serviceU;
-	
+
 	@GetMapping
 	public Iterable<Utente> getAll() {
 		return serviceU.getAll();
-	} 
-	
+	}
+
 	@GetMapping("/{id}")
 	public Utente get(@PathVariable int id) {
 		return serviceU.getOne(id);
 	}
-	
+
 	@PostMapping
 	public Utente save(@RequestBody Utente u) {
 		return serviceU.save(u);

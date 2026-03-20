@@ -7,5 +7,5 @@ import it.home.models.Opera;
 
 @Repository
 public interface OperaRepository extends CrudRepository<Opera, Integer>{
-	
+
 }
