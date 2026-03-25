@@ -12,8 +12,8 @@ public class OperaService {
 	@Autowired
 	OperaRepository repo;
 
-	public void save(Opera op) {
-		repo.save(op);
+	public Opera save(Opera op) {
+		return repo.save(op);
 	}
 
 	public void delete(int id) {

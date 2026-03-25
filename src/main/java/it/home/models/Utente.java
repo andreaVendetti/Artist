@@ -27,6 +27,7 @@ public class Utente {
 	@Column(length = 255)
 	private String pass;
 
+	//se admin == 1 allora è un admin
 	@Column
 	private int admin;
 
