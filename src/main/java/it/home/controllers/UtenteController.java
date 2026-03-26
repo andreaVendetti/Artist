@@ -24,33 +24,37 @@ public class UtenteController {
 
 	@Autowired
 	AuthService authService;
-	
+
 	// il "?" serve per indicare che può arrivare un ogetto o un messaggio di errore
 	@GetMapping
 	public ResponseEntity<?> getAll(@RequestHeader("x-utente-id") int utenteId) {
-		if (!authService.isAdmin(utenteId))
+		if (!authService.isAdmin(utenteId)) {
 			return ResponseEntity.status(403).body("Non autorizzato");
+		}
 		return ResponseEntity.ok(serviceU.getAll());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> get(@PathVariable int id, @RequestHeader("x-utente-id") int utenteId) {
-		if (!authService.isAdmin(utenteId))
+		if (!authService.isAdmin(utenteId)) {
 			return ResponseEntity.status(403).body("Non autorizzato");
+		}
 		return ResponseEntity.ok(serviceU.getOne(id));
 	}
 
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Utente u, @RequestHeader("x-utente-id") int utenteId) {
-		if (!authService.isAdmin(utenteId))
+		if (!authService.isAdmin(utenteId)) {
 			return ResponseEntity.status(403).body("Non autorizzato");
+		}
 		return ResponseEntity.ok(serviceU.save(u));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id, @RequestHeader("x-utente-id") int utenteId) {
-		if (!authService.isAdmin(utenteId))
+		if (!authService.isAdmin(utenteId)) {
 			return ResponseEntity.status(403).body("Non autorizzato");
+		}
 		serviceU.delete(id);
 		return ResponseEntity.ok().build();
 	}
