@@ -16,7 +16,7 @@ import it.home.services.UtenteService;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
 public class AuthController {
 
 	@Autowired

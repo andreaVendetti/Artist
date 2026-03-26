@@ -24,7 +24,8 @@ public class UtenteController {
 
 	@Autowired
 	AuthService authService;
-
+	
+	// il "?" serve per indicare che può arrivare un ogetto o un messaggio di errore
 	@GetMapping
 	public ResponseEntity<?> getAll(@RequestHeader("x-utente-id") int utenteId) {
 		if (!authService.isAdmin(utenteId))
