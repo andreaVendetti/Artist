@@ -14,8 +14,10 @@ public class UtenteService {
 	UtenteRepository repo;
 
 	public Utente save(Utente u) {
-		String pass = BCrypt.withDefaults().hashToString(12, u.getPass().toCharArray());
-		u.setPass(pass);
+		if(u.getPass() != null) {
+			String pass = BCrypt.withDefaults().hashToString(12, u.getPass().toCharArray());
+			u.setPass(pass);			
+		}
 		return repo.save(u);
 	}
 	
@@ -23,7 +25,9 @@ public class UtenteService {
 	public Utente login(String email, String password) {
 		Utente u = repo.findByEmail(email).orElseThrow(() -> new RuntimeException("Utente non trovato"));
 		// gli si passa prima la pass presa dal frontend e poi quella del db e le confronta
+	
 		if(BCrypt.verifyer().verify(password.toCharArray(), u.getPass()).verified == true) {
+			System.out.println("utente");
 			return u;
 		}
 		return null;

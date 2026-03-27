@@ -3,7 +3,6 @@ package it.home.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import it.home.services.AuthService;
 import it.home.services.OperaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/opere")
 public class OperaController {
 
@@ -35,7 +33,7 @@ public class OperaController {
 	}
 
 	@GetMapping("/{id}")
-	public Opera getOpera(int id) {
+	public Opera getOpera(@PathVariable int id) {
 		return serviceO.getOpera(id);
 	}
 	
@@ -52,16 +50,16 @@ public class OperaController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestHeader("x-utente-id") int id, @RequestBody Opera op){
-		if (verify(id)) {
+	public ResponseEntity<?> update(@RequestHeader("x-utente-id") int idU, @RequestBody Opera op){
+		if (verify(idU)) {
 			return ResponseEntity.ok(serviceO.save(op));
 		}
 		return ResponseEntity.status(403).body("Non autorizzato");
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@RequestHeader("x-utente-id") int id, @PathVariable int idO){
-		if(verify(id)) {
+	public ResponseEntity<?> delete(@RequestHeader("x-utente-id") int idU, @PathVariable int idO){
+		if(verify(idU)) {
 			serviceO.delete(idO);
 			return ResponseEntity.ok().build();
 		}

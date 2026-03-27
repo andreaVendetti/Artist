@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import it.home.services.AuthService;
 import it.home.services.UtenteService;
 
 @RestController
+
 @RequestMapping("api/utenti")
 public class UtenteController {
 
@@ -44,6 +46,14 @@ public class UtenteController {
 
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Utente u, @RequestHeader("x-utente-id") int utenteId) {
+		if (!authService.isAdmin(utenteId)) {
+			return ResponseEntity.status(403).body("Non autorizzato");
+		}
+		return ResponseEntity.ok(serviceU.save(u));
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@RequestBody Utente u, @RequestHeader("x-utente-id") int utenteId){
 		if (!authService.isAdmin(utenteId)) {
 			return ResponseEntity.status(403).body("Non autorizzato");
 		}

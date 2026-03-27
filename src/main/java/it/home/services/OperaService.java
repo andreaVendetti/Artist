@@ -25,6 +25,6 @@ public class OperaService {
 	}
 
 	public Opera getOpera(int id) {
-		return repo.findById(id).get();
+		return repo.findById(id).orElseThrow(() -> new RuntimeException("Opera non trovata"));
 	}
 }
