@@ -14,11 +14,15 @@ public class UtenteService {
 	UtenteRepository repo;
 
 	public Utente save(Utente u) {
-		if(u.getPass() != null) {
-			String pass = BCrypt.withDefaults().hashToString(12, u.getPass().toCharArray());
-			u.setPass(pass);			
-		}
-		return repo.save(u);
+	    if(u.getPass() != null && !u.getPass().isEmpty()) {
+	        String pass = BCrypt.withDefaults().hashToString(12, u.getPass().toCharArray());
+	        u.setPass(pass);
+	    } else {
+	        // se la pass è vuota, mantieni quella già nel DB
+	        Utente esistente = repo.findById(u.getId()).get();
+	        u.setPass(esistente.getPass());
+	    }
+	    return repo.save(u);
 	}
 	
 	
@@ -27,10 +31,10 @@ public class UtenteService {
 		// gli si passa prima la pass presa dal frontend e poi quella del db e le confronta
 	
 		if(BCrypt.verifyer().verify(password.toCharArray(), u.getPass()).verified == true) {
-			System.out.println("utente");
+			
 			return u;
 		}
-		return null;
+		throw new RuntimeException("Password errata");
 	}
 	
 	public Iterable<Utente> getAll(){
