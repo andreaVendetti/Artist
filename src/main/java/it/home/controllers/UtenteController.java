@@ -46,9 +46,9 @@ public class UtenteController {
 
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Utente u, @RequestHeader("x-utente-id") int utenteId) {
-//		if (!authService.isAdmin(utenteId)) {
-//			return ResponseEntity.status(403).body("Non autorizzato");
-//		}
+		if (!authService.isAdmin(utenteId)) {
+			return ResponseEntity.status(403).body("Non autorizzato");
+		}
 		return ResponseEntity.ok(serviceU.save(u));
 	}
 	
