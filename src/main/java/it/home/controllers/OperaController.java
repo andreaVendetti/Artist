@@ -81,9 +81,9 @@ public class OperaController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@RequestHeader("x-utente-id") int idU, @PathVariable int idO){
+	public ResponseEntity<?> delete(@RequestHeader("x-utente-id") int idU, @PathVariable int id){
 		if(verify(idU)) {
-			serviceO.delete(idO);
+			serviceO.delete(id);
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.status(403).body("Non autorizzato");
