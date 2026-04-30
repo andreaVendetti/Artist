@@ -1,5 +1,7 @@
 package it.home.models;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -77,6 +79,30 @@ public class Utente {
 
 	public void setAdmin(int admin) {
 		this.admin = admin;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(admin, cognome, email, id, nome, pass);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utente other = (Utente) obj;
+		return admin == other.admin && Objects.equals(cognome, other.cognome) && Objects.equals(email, other.email)
+				&& id == other.id && Objects.equals(nome, other.nome) && Objects.equals(pass, other.pass);
+	}
+
+	@Override
+	public String toString() {
+		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", pass=" + pass
+				+ ", admin=" + admin + "]";
 	}
 
 }
